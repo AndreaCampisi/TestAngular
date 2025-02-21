@@ -12,8 +12,8 @@ import { TasksService } from './tasks.service';
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
-  @Input({ required: true }) userId?: string;
-  @Input({ required: true }) name?: string;
+  @Input({ required: true }) userId!: string;
+  @Input({ required: true }) name!: string;
   isAddingTask = false;
   
   constructor(private tasksService: TasksService) {}
@@ -23,20 +23,11 @@ export class TasksComponent {
     return this.tasksService.getUserTasks(this.userId!);
   }
 
-  onCompleteTask(id: string) {
-    this.tasksService.removeTask(id);
-  }
-
   onStartAddTask() {
     this.isAddingTask = true;
   }
 
-  onCancelAddTask() {
-    this.isAddingTask = false;
-  }
-
-  onAddTask(newTaskData: NewTaskData) {
-    this.tasksService.addTask(this.userId!, newTaskData);
+  onCloseAddTask() {
     this.isAddingTask = false;
   }
 }
